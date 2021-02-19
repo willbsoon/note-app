@@ -9,22 +9,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.willbsoon.na.api.entity.User;
+import com.willbsoon.na.api.model.response.ListResult;
 import com.willbsoon.na.api.repo.UserJpaRepo;
+import com.willbsoon.na.api.service.ResponseService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 
+@Api(tags= {"1. User"})
 @RestController
 @AllArgsConstructor
 @RequestMapping(value="/v1")
 public class UserController {
 	private final UserJpaRepo userJpaRepo;
+	private final ResponseService responseService;
 	
 	@ApiOperation(value="회원조회", notes="모든 회원을 조회한다")
 	@GetMapping(value="/user")
-	public List<User > findAllUser(){
-		return userJpaRepo.findAll();
+	public ListResult<User> findAllUser(){
+		return responseService.getListResult(userJpaRepo.findAll());
 	}
 	
 	@ApiOperation(value="회원입력", notes="회원을 생성한다")
