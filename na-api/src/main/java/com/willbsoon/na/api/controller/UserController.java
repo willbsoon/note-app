@@ -44,9 +44,4 @@ public class UserController {
 		return responseService.getSingleResult(userJpaRepo.save(user));
 	}
 	
-	@GetMapping(value="/user1")
-	public String test(){
-		return "test";
-	}
-
 }
