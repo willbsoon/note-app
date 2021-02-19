@@ -2,13 +2,17 @@ package com.willbsoon.na.api.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.willbsoon.na.api.entity.User;
+import com.willbsoon.na.api.model.response.CommonResult;
 import com.willbsoon.na.api.model.response.ListResult;
 import com.willbsoon.na.api.model.response.SingleResult;
 import com.willbsoon.na.api.repo.UserJpaRepo;
@@ -33,9 +37,17 @@ public class UserController {
 		return responseService.getListResult(userJpaRepo.findAll());
 	}
 	
+	@ApiOperation(value="회원 단건 조회", notes="회원 번호로 한명의 회원을 조회한다")
+	@GetMapping(value="/user/{msrl}")
+	public SingleResult<User> findUserbyId(
+			@ApiParam(value="회원 번호", required=true) @PathVariable Long msrl){
+		return responseService.getSingleResult(userJpaRepo.findById(msrl).orElse(null));
+	}
+	
 	@ApiOperation(value="회원입력", notes="회원을 생성한다")
 	@PostMapping(value="/user")
-	public SingleResult<User> save(@ApiParam(value = "아이디", required = true)@RequestParam String uid,
+	public SingleResult<User> save(
+					@ApiParam(value = "아이디", required = true)@RequestParam String uid,
 					@ApiParam(value = "이름", required = true)@RequestParam String name){
 		User user = new User().builder()
 				.name(name)
@@ -44,9 +56,29 @@ public class UserController {
 		return responseService.getSingleResult(userJpaRepo.save(user));
 	}
 	
-	@GetMapping(value="/user1")
-	public String test(){
-		return "test";
+	@ApiOperation(value="회원정보 수정", notes = "회원의 정보를 수정한다")
+	@PutMapping(value="/user")
+	public SingleResult<User> modify(
+			@ApiParam(value = "회원 번호", required = true)@RequestParam Long msrl,
+			@ApiParam(value = "회원 아이디", required = true)@RequestParam String uid,
+			@ApiParam(value = "회원 이름", required = true)@RequestParam String name ){
+		User user = new User().builder()
+				.msrl(msrl)
+				.uid(uid)
+				.name(name)
+				.build();
+		return responseService.getSingleResult(userJpaRepo.save(user));
 	}
-
+	
+	@ApiOperation(value = "회원 삭제", notes = "회원 번호로 회원 정보를 삭제한다.")
+	@DeleteMapping(value = "/user/{msrl}")
+	public CommonResult delete(
+			@ApiParam(value = "회원 번호", required = true)@PathVariable Long msrl) {
+		userJpaRepo.deleteById(msrl);
+		return responseService.getSuccessResult();
+	}
+	
+	
+	
+	
 }
