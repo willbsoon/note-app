@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.willbsoon.na.api.entity.User;
 import com.willbsoon.na.api.model.response.ListResult;
+import com.willbsoon.na.api.model.response.SingleResult;
 import com.willbsoon.na.api.repo.UserJpaRepo;
 import com.willbsoon.na.api.service.ResponseService;
 
@@ -34,13 +35,13 @@ public class UserController {
 	
 	@ApiOperation(value="회원입력", notes="회원을 생성한다")
 	@PostMapping(value="/user")
-	public User save(@ApiParam(value = "아이디", required = true)@RequestParam String uid,
+	public SingleResult<User> save(@ApiParam(value = "아이디", required = true)@RequestParam String uid,
 					@ApiParam(value = "이름", required = true)@RequestParam String name){
 		User user = new User().builder()
 				.name(name)
 				.uid(uid)
 				.build();
-		return userJpaRepo.save(user);
+		return responseService.getSingleResult(userJpaRepo.save(user));
 	}
 	
 	@GetMapping(value="/user1")
