@@ -16,6 +16,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import net.rakugakibox.util.YamlResourceBundle;
+
 @Configuration
 public class MessageConfig implements WebMvcConfigurer{
 	@Bean
@@ -55,8 +57,8 @@ public class MessageConfig implements WebMvcConfigurer{
 	private static class YamlMessageSource extends ResourceBundleMessageSource{
 		@Override
 		protected ResourceBundle doGetBundle(String basename, Locale locale) throws MissingResourceException{
-//			return ResourceBundle.getBundle(basename, locale, YamlResourceBundle.Control.INSTANCE);
-			return ResourceBundle.getBundle(basename, locale);
+			return ResourceBundle.getBundle(basename, locale, YamlResourceBundle.Control.INSTANCE);
+//			return ResourceBundle.getBundle(basename, locale);
 //			return null;
 		}
 	}

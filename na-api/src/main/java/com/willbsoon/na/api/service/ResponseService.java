@@ -46,12 +46,19 @@ public class ResponseService {
 		setSuccessResult(result);
 		return result;
 	}
-	public CommonResult getFailResult() {
-		CommonResult result = new CommonResult();
-		result.setSuccess(false);
-		result.setCode(CommonResponse.FAIL.getCode());
-		result.setMsg(CommonResponse.FAIL.getMsg());
-		return result;
+//	public CommonResult getFailResult() {
+//		CommonResult result = new CommonResult();
+//		result.setSuccess(false);
+//		result.setCode(CommonResponse.FAIL.getCode());
+//		result.setMsg(CommonResponse.FAIL.getMsg());
+//		return result;
+//	}
+	public CommonResult getFailResult(int code, String msg) {
+	    CommonResult result = new CommonResult();
+	    result.setSuccess(false);
+	    result.setCode(code);
+	    result.setMsg(msg);
+	    return result;
 	}
 	public CommonResult setSuccessResult(CommonResult result) {
 		result.setSuccess(true);
