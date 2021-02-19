@@ -22,8 +22,8 @@ public class SwaggerConfig{
         return new Docket(DocumentationType.SWAGGER_2)
         		.apiInfo(swaggerInfo())
         		.select()
-//                .apis(RequestHandlerSelectors.basePackage("com.rest.api.controller"))
-        		.apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.willbsoon.na.api"))
+//        		.apis(RequestHandlerSelectors.any())	// basic error controller 제거
                 .paths(PathSelectors.any())
         		.build()
         		.pathMapping("/")

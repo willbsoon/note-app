@@ -16,5 +16,11 @@
 
 ---
 
+### 주의사항
+- 디비 실행  
+- http://localhost:8080/swagger-ui.html
+	-  api 명세서 참고
+
+
 
 [참조](https://daddyprogrammer.org/post/19/spring-boot2-start-intellij/)하여 작업중
