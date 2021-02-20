@@ -67,8 +67,9 @@ project(':na-api'){
 
 	    implementation 'io.springfox:springfox-swagger2:3.0.0'
         implementation 'io.springfox:springfox-swagger-ui:2.10.5'
-        
+
         implementation 'net.rakugakibox.util:yaml-resource-bundle:1.1'
+
 
 	    runtimeOnly 'com.h2database:h2'
         compileOnly 'org.projectlombok:lombok'
