@@ -18,6 +18,10 @@
 
 ### 주의사항
 - 디비 실행  
+    - data 폴더 밑에 h2 zip 파일의 압축을 풀고 bin/h2.sh 파일을 실행한다.  
+           generic h2(embedded)로 접속하면 디비를 자동으로 생성가능함  
+           그리고 접속은 generic h2(server)로 들어간다
+
 - http://localhost:8080/swagger-ui.html
 	-  api 명세서 참고
 

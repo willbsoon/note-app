@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.willbsoon.na.api.advice.exception.CUserNotFoundException;
 import com.willbsoon.na.api.entity.User;
 import com.willbsoon.na.api.model.response.CommonResult;
 import com.willbsoon.na.api.model.response.ListResult;
@@ -40,8 +41,11 @@ public class UserController {
 	@ApiOperation(value="회원 단건 조회", notes="회원 번호로 한명의 회원을 조회한다")
 	@GetMapping(value="/user/{msrl}")
 	public SingleResult<User> findUserbyId(
-			@ApiParam(value="회원 번호", required=true) @PathVariable Long msrl){
-		return responseService.getSingleResult(userJpaRepo.findById(msrl).orElse(null));
+			@ApiParam(value="회원 번호", required=true) @PathVariable Long msrl,
+			@ApiParam(value="언어", defaultValue = "ko") @RequestParam String lang){
+//		return responseService.getSingleResult(userJpaRepo.findById(msrl).orElse(null));
+//		return responseService.getSingleResult(userJpaRepo.findById(msrl).orElseThrow(Exception::new));
+		return responseService.getSingleResult(userJpaRepo.findById(msrl).orElseThrow(CUserNotFoundException::new));
 	}
 	
 	@ApiOperation(value="회원입력", notes="회원을 생성한다")
