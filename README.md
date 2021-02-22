@@ -7,6 +7,11 @@
 - [X] swagger 테스트 성공
 - [x] 깃헙 프로젝트 생성
 - [x] 칸반 작업하기
+- [x] 스프링 보안 추가함 -> 필터, 인터셉터, 어드바이스 정리 필요
+[여기](https://daddyprogrammer.org/post/636/springboot2-springsecurity-authentication-authorization/)  
+
+
+
 
 ---
 
