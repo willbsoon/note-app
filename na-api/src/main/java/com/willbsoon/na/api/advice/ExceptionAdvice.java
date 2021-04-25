@@ -2,6 +2,7 @@ package com.willbsoon.na.api.advice;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.willbsoon.na.api.advice.exception.*;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -9,10 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.willbsoon.na.api.advice.exception.CAccessDeniedException;
-import com.willbsoon.na.api.advice.exception.CAuthenticationEntryPointException;
-import com.willbsoon.na.api.advice.exception.CEmailSigninFailedException;
-import com.willbsoon.na.api.advice.exception.CUserNotFoundException;
 import com.willbsoon.na.api.model.response.CommonResult;
 import com.willbsoon.na.api.service.ResponseService;
 
@@ -59,4 +56,15 @@ public class ExceptionAdvice{
     private String getMessage(String code, Object[] args) {
         return messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
     }
+
+	@ExceptionHandler(CCommunicationException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public CommonResult communicationException(HttpServletRequest request, CCommunicationException e) {
+		return responseService.getFailResult(Integer.valueOf(getMessage("communicationError.code")), getMessage("communicationError.msg"));
+	}
+	@ExceptionHandler(CUserExistException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public CommonResult communicationException(HttpServletRequest request, CUserExistException e) {
+		return responseService.getFailResult(Integer.valueOf(getMessage("existingUser.code")), getMessage("existingUser.msg"));
+	}
 }

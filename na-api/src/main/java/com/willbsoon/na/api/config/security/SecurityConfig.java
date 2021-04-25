@@ -50,7 +50,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 					.authorizeRequests()
 					// 가입및 인증 주소는 누구나 접근
-						.antMatchers("/*/signin", "/*/signup").permitAll()
+//						.antMatchers("/*/signin", "/*/signup").permitAll()
+						.antMatchers("/*/signin", "/*/signin/**",
+								"/*/signup", "/*/signup/**", "/social/**").permitAll()
 						// helloworld로 시작하는 GET 리소스요청은 누구나 가능
 						.antMatchers(HttpMethod.GET, "helloworld/**").permitAll()
 	                    .antMatchers(HttpMethod.GET, "/exception/**").permitAll() // exception 추가

@@ -24,6 +24,7 @@
 ### 주의사항
 - 디비 실행  
     - data 폴더 밑에 h2 zip 파일의 압축을 풀고 bin/h2.sh 파일을 실행한다.  
+    None Root !!!   
         ```
       $ unzip h2-2019-03-13.zip
       $ cd h2/bin

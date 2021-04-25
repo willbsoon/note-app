@@ -41,13 +41,16 @@ public class User implements UserDetails{
 	
 	@Column(nullable=false, unique=true, length=30)
 	private String uid;
-	
-	@JsonProperty(access = Access.WRITE_ONLY)
-	@Column(nullable = false, length =100)
+
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@Column(length = 100)
 	private String password;
 	
 	@Column(nullable=false, length=100)
 	private String name;
+
+	@Column(length = 100)
+	private String provider;
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Builder.Default

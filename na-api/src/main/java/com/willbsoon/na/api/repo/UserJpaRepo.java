@@ -10,4 +10,5 @@ import com.willbsoon.na.api.entity.User;
 @Repository
 public interface UserJpaRepo extends JpaRepository<User, Long>{
 	Optional<User> findByUid(String email);
+	Optional<User> findByUidAndProvider(String uid, String provider);
 }
