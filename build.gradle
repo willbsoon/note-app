@@ -73,6 +73,8 @@ project(':na-api'){
 
         implementation 'net.rakugakibox.util:yaml-resource-bundle:1.1'
 
+        implementation 'com.google.code.gson:gson'
+
 	    runtimeOnly 'com.h2database:h2'
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
