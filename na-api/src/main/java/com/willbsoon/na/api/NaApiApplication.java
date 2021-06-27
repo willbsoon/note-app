@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 public class NaApiApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(NaApiApplication.class, args);
 	}
 	

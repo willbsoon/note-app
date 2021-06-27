@@ -28,12 +28,14 @@
         ```
       $ unzip h2-2019-03-13.zip
       $ cd h2/bin
+      $ su ubuntu
       $ ./h2.sh
       or
       $ ./h2.bat
         ```
        generic h2(embedded)로 접속하면 디비를 자동으로 생성가능함  
        그리고 접속은 generic h2(server)로 들어간다
+       http://localhost:8082/
 
 - http://localhost:8080/swagger-ui.html
 	-  api 명세서 참고
