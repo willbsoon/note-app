@@ -37,9 +37,6 @@ dependencies {
 * na-api
 * na-front
 *
-*
-*
-*
 */
 project(':na-api'){
     apply plugin : 'java'
@@ -57,7 +54,14 @@ project(':na-api'){
     repositories {
         mavenCentral()
     }
-
+    sourceSets {
+        main {
+            resources {
+                // To load properties files
+                srcDirs("src/main/resources", "src/main/resources/profiles")
+            }
+        }
+    }
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -89,7 +93,29 @@ project(':na-api'){
     test {
         useJUnitPlatform()
     }
+
+
+    ext.profile = (!project.hasProperty('profile') || !profile) ? 'dev' : profile
+    bootRun {
+        String activeProfile = System.properties['spring.profiles.active']
+        systemProperty "spring.profiles.active", activeProfile
+    }
+
 }
 project(':na-front'){
+    // add in None spring project
+    bootJar {
+        enabled = false
+    }
+    bootWar {
+        enabled = false
+    }
+    bootRun {
+        enabled = false
+    }
+    jar {
+        enabled = true
+    }
+
 
 }
